@@ -1,4 +1,4 @@
-package com.bfyd.easypay.alipay;
+package com.bfyd.easypay.pay.alipay;
 
 
 import com.alipay.api.DefaultAlipayClient;

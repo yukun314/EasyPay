@@ -124,6 +124,29 @@ public abstract class WebUtils {
 
     /**
      * 执行HTTP POST请求。
+     *
+     * @param url 请求地址
+     * @param params 请求参数
+     * @param charset 字符集，如UTF-8, GBK, GB2312
+     * @return 响应字符串
+     * @throws IOException
+     */
+    public static String doPost(String url, String params, String charset,
+                                int connectTimeout, int readTimeout) throws IOException {
+        String ctype = "application/x-www-form-urlencoded;charset=" + charset;
+//        String query = buildQuery(params, charset);
+        byte[] content = {};
+//        if (query != null) {
+//            content = query.getBytes(charset);
+//        }
+        if(params != null && params.length() > 0){
+            content = params.getBytes();
+        }
+        return doPost(url, ctype, content, connectTimeout, readTimeout);
+    }
+
+    /**
+     * 执行HTTP POST请求。
      * 
      * @param url 请求地址
      * @param ctype 请求类型

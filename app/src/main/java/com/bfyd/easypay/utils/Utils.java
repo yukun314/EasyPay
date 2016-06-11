@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -126,5 +127,22 @@ public class Utils {
     public static int dp2px(int dp,Context context) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
                 context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * 合并两个数组
+     * @param first 要合并的第一个数组
+     * @param second 要合并的第二个数组
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static <T> T [] concat(T[] first, T[] second) {
+        T[] result = Arrays.copyOf(first, first.length + second.length);
+        System.arraycopy(second, 0, result, first.length, second.length);
+        return result;
+//        T[] c = new T[first.length+ second.length];
+//        System.arraycopy(first, 0, c, 0, first.length);
+//        System.arraycopy(second, 0, c, first.length, second.length);
+//        return c;
     }
 }

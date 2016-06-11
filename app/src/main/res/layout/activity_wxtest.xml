@@ -16,4 +16,10 @@
 	    android:text="test"
 	android:layout_below="@id/activity_wxtest_message"/>
 
+	<ImageView
+		android:id="@+id/activity_wxtest_image"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"/>
+
 </RelativeLayout>
