@@ -22,7 +22,7 @@ public class NetworkUtils {
 //
 //    public static final String ServerURL = BaseURL+"/AppInterface/update";
 
-    public static final String BaseURL = "http://192.168.1.100";
+    public static final String BaseURL = "http://192.168.1.107:8080/AppInterface";
 
     public static final String ServerURL = BaseURL + "/app1/api.php";
 

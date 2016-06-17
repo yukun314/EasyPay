@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bfyd.easypay.activity.AliPayActivity;
+import com.bfyd.easypay.activity.OkHttpTest;
 import com.bfyd.easypay.activity.WXTestActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -32,6 +33,16 @@ public class SplashActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				Intent intent  =  new Intent();
 				intent.setClass(SplashActivity.this , AliPayActivity.class);
+				SplashActivity.this.startActivity(intent);
+			}
+		});
+
+		Button button2 = (Button) findViewById(R.id.activity_splash_button3);
+		button2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent  =  new Intent();
+				intent.setClass(SplashActivity.this , OkHttpTest.class);
 				SplashActivity.this.startActivity(intent);
 			}
 		});

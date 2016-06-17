@@ -103,14 +103,13 @@ public class DefaultAlipayClient implements AlipayClient {
         try {
             tRsp = parser.parse((String) rt.get("rsp"));
             tRsp.setBody((String) rt.get("rsp"));
-
+            System.out.println("rsp:"+rt.get("rsp"));
             // 针对成功结果且有支付宝公钥的进行验签
             if (!StringUtils.isEmpty(this.alipayPublicKey)) {
 
                 SignItem signItem = parser.getSignItem(request, tRsp);
 
                 if (signItem == null) {
-
                     throw new AlipayApiException("sign check fail: Body is Empty!");
                 }
 
@@ -153,7 +152,6 @@ public class DefaultAlipayClient implements AlipayClient {
             AlipayLogger.logBizError((String) rt.get("rsp"));
             throw new AlipayApiException(e);
         }
-
         tRsp.setParams((AlipayHashMap) rt.get("textParams"));
         if (!tRsp.isSuccess()) {
             AlipayLogger.logErrorScene(rt, tRsp, "");

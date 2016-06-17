@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.alipay.api.AlipayApiException;
 import com.bfyd.easypay.R;
+import com.bfyd.easypay.pay.wxpay.client.OrderQueryClient;
+import com.bfyd.easypay.pay.wxpay.request.OrderQueryRequest;
 import com.bfyd.easypay.pay.wxpay.request.UnifiedOrderRequest;
 import com.bfyd.easypay.app.BaseActivity;
+import com.bfyd.easypay.pay.wxpay.response.OrderQueryResponse;
 import com.bfyd.easypay.pay.wxpay.response.UnifiedOrderResponse;
 import com.bfyd.easypay.pay.wxpay.client.UnifiedOrderClient;
 import com.bfyd.easypay.utils.QRCodeUtil;
@@ -31,6 +34,11 @@ public class WXTestActivity extends BaseActivity {
 	private Context mContext;
 	private final int UNI_FAIL = 1;
 	private final int UNI_SUCCESS = 2;
+	private final int SEL_SUCCESS = 3;
+	private final int SEL_PAYINF = 4;
+	private final int SEL_FAIL = 5;
+	private boolean neetSelect = true;
+	private String out_trade_no = "9879885439";
 
 	private Handler mHandler = new Handler(){
 		@Override
@@ -42,9 +50,23 @@ public class WXTestActivity extends BaseActivity {
 				Toast.makeText(mContext,
 						(String)msg.obj,Toast.LENGTH_SHORT).show();
 			} else if(what == UNI_SUCCESS) {
+				mImageView.setVisibility(View.VISIBLE);
 				Bitmap bitmap = (Bitmap)msg.obj;
 				mImageView.setImageBitmap(bitmap);
-				//FIXME 关于支付结果查询 什么时候发起？
+				queryOrder();
+			} else if (what == SEL_SUCCESS) {
+				mMessageView.setText((String)msg.obj);
+				Toast.makeText(mContext,
+						(String)msg.obj,Toast.LENGTH_SHORT).show();
+			} else if(what == SEL_PAYINF) {
+				mImageView.setVisibility(View.INVISIBLE);
+				mMessageView.setText((String)msg.obj);
+				Toast.makeText(mContext,
+						(String)msg.obj,Toast.LENGTH_SHORT).show();
+			} else if(what == SEL_FAIL) {
+				mMessageView.setText((String)msg.obj);
+				Toast.makeText(mContext,
+						(String)msg.obj,Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
@@ -69,7 +91,8 @@ public class WXTestActivity extends BaseActivity {
 						UnifiedOrderRequest request = new UnifiedOrderRequest(WXTestActivity.this);
 						request.total_fee = 1;
 						request.body = "JSAPI支付测试";
-						request.out_trade_no = "9879885439";
+						out_trade_no = Utils.getOutTradeNo(WXTestActivity.this);
+						request.out_trade_no = out_trade_no;
 						try {
 							UnifiedOrderResponse response = payClient.execute(request, UnifiedOrderResponse.class);
 							processResult(response);
@@ -81,10 +104,27 @@ public class WXTestActivity extends BaseActivity {
 
 			}
 		});
+
+		Button button1 = (Button) findViewById(R.id.activity_wxtest_button1);
+		button1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				a();
+				new Thread() {
+					@Override
+					public void run() {
+						super.run();
+						queryOrder();
+					}
+				}.start();
+
+			}
+		});
 	}
 
 	private void processResult(UnifiedOrderResponse response){
 		String returnCode = response.return_code;
+		System.out.println("returnCode:"+returnCode+"   "+response);
 		Message message = new Message();
 		if(returnCode.equals("SUCCESS") | returnCode == "SUCCESS") {//返回状态码
 			String resultCode = response.result_code;
@@ -163,6 +203,70 @@ public class WXTestActivity extends BaseActivity {
 			message.obj = response.return_msg;
 			mHandler.sendMessage(message);
 		}
+	}
+
+	private void queryOrder(){
+		neetSelect = true;
+		final Message message = new Message();
+		final OrderQueryClient client = new OrderQueryClient();
+		final OrderQueryRequest request = new OrderQueryRequest();
+		request.out_trade_no = out_trade_no;
+		new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				//查到支付成功或外部终止时停止循环
+				while(neetSelect) {
+					try {
+						OrderQueryResponse response = client.execute(request, OrderQueryResponse.class);
+						System.out.println("查询支付结果response:"+response);
+						if(response.return_code.equals("SUCCESS") | response.return_code == "SUCCESS") {
+							if(response.result_code.equals("SUCCESS") | response.result_code == "SUCCESS") {
+								String tradeState = response.trade_state;
+								if(tradeState.equals("SUCCESS") | tradeState == "SUCCESS") {//支付成功
+									neetSelect = false;
+									message.what = SEL_SUCCESS;
+									message.obj = "支付成功:"+response.trade_state_desc;
+									mHandler.sendMessage(message);
+								} else if(tradeState.equals("USERPAYING") | tradeState == "USERPAYING") {//用户支付中
+									//界面处理，如 不再显示二维码 显示正在支付
+									message.what = SEL_PAYINF;
+									message.obj = "正在支付:"+response.trade_state_desc;
+									mHandler.sendMessage(message);
+								} else if(tradeState.equals("CLOSED") | tradeState == "CLOSED") {//已关闭
+									//FIXME 是不是不能再支付
+									neetSelect = false;
+									message.what = SEL_FAIL;
+									message.obj = "支付失败:"+response.trade_state_desc;
+									mHandler.sendMessage(message);
+								} else {
+//									REFUND—转入退款
+//									NOTPAY—未支付
+//									REVOKED—已撤销（刷卡支付）
+//									USERPAYING--用户支付中
+//									PAYERROR--支付失败(其他原因，如银行返回失败)
+									neetSelect = false;
+									message.what = SEL_FAIL;
+									message.obj = "支付失败:"+response.trade_state_desc;
+									mHandler.sendMessage(message);
+									System.out.println("response:"+response);
+								}
+
+							}
+						}
+					} catch (AlipayApiException e) {
+						e.printStackTrace();
+					}
+					//每秒查询一次
+					try {
+						this.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
 
 	}
+
 }

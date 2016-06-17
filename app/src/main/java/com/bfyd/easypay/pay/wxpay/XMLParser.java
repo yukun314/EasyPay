@@ -73,7 +73,7 @@ public class XMLParser {
 //                map.put(node.getNodeName(),node.getTextContent());
                 String name = node.getNodeName();
                 String content = node.getTextContent();
-                System.out.println("name:"+name+"   text:"+content);
+//                System.out.println("name:"+name+"   text:"+content);
                 json.put(name,content);
             }
             i++;
@@ -94,6 +94,7 @@ public class XMLParser {
             Object o = f.get(c);
             if(o != null) {
                 String name = f.getName();
+                System.out.println("name:"+name);
                 sb.append("<"+name+">");
                 sb.append(o);
                 sb.append("</"+name+">");

@@ -1,4 +1,4 @@
-package com.bfyd.easypay.pay.alipay;
+package com.bfyd.easypay.pay.alipay.request;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by zyk on 2016/6/6.
  * 订单包含的商品列表信息(商品明细)
  */
-public class GoodsDetailEntity {
+public class PrecreateGoodsDetailEntity {
     // 商品编号(国标)
     @SerializedName("goods_id")
     public String goods_id;//必须

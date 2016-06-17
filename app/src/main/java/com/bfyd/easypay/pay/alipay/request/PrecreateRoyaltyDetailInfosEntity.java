@@ -1,11 +1,11 @@
-package com.bfyd.easypay.pay.alipay;
+package com.bfyd.easypay.pay.alipay.request;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by zyk on 2016/6/6.
  */
-public class RoyaltyDetailInfosEntity{
+public class PrecreateRoyaltyDetailInfosEntity {
 	//分账序列号，表示分账执行的顺序，必须为正整数
 	@SerializedName("serial_no")
 	public int serial_no;

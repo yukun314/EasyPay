@@ -81,7 +81,6 @@ public class Converters {
             PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
 
             boolean isResponseClazz = AlipayResponse.class.isAssignableFrom(clazz);
-
             for (PropertyDescriptor pd : pds) {
                 Method writeMethod = pd.getWriteMethod();
                 if (writeMethod == null) { // ignore read-only fields

@@ -7,6 +7,7 @@ import com.alipay.api.AlipayResponse;
 import com.alipay.api.SignItem;
 import com.alipay.api.internal.mapping.Converter;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 /**
  * 单个JSON对象解释器。
@@ -23,7 +24,10 @@ public class ObjectJsonParser<T extends AlipayResponse> implements AlipayParser<
     }
 
     public T parse(String rsp) throws AlipayApiException {
-//        Converter converter = new JsonConverter();
+        Converter converter = new JsonConverter();
+//        rsp = rsp.replace("\"","");
+        rsp = rsp.substring(rsp.indexOf("{",2), rsp.indexOf("}")+1);
+//        System.out.println("截取之后rsp:"+rsp);
         Gson gson = new Gson();
         return gson.fromJson(rsp, clazz);
 //        return converter.toResponse(rsp, clazz);

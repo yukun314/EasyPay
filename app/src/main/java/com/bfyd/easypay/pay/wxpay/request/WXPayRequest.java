@@ -9,8 +9,8 @@ import java.util.Map;
  * 微信 请求参数
  */
 public abstract class WXPayRequest implements Serializable {
-	//签名
-	public String sign;
+
+	public abstract void setSign(String sign);
 
 	public abstract Map<String, Object> toMap();
 

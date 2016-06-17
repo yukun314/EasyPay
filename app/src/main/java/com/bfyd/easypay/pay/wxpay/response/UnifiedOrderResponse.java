@@ -10,7 +10,6 @@ public class UnifiedOrderResponse extends WXPayResponse {
 	//调用接口提交的终端设备号，
 	public String device_info;//设备号
 
-
 	//SUCCESS/FAIL
 	public String result_code;//业务结果
 

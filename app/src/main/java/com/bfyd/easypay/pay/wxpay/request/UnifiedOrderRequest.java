@@ -28,11 +28,15 @@ public class UnifiedOrderRequest extends WXPayRequest {
 	//随机字符串，不长于32位。推荐随机数生成算法
 	public String nonce_str;//随机字符串
 
+	//签名
+	public String sign;
+
 	//商品或支付单简要描述
 	public String body;//商品描述
 
 	//商品名称明细列表
 	public String detail;//商品详情
+
 
 	//附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
 	public String attach;//附加数据
@@ -83,8 +87,10 @@ public class UnifiedOrderRequest extends WXPayRequest {
 		//随机字符串，不长于32 位
 		this.nonce_str = StringUtils.getRandomStringByLength(32);
 		this.spbill_create_ip = NetworkUtils.GetIp(context);
-		this.trade_type = "NATIVE";
+//		this.trade_type = "NATIVE";
+		this.trade_type = "JSAPI";
 		this.notify_url = WXConfigure.notifyUrl;
+		this.openid = "ozwo9uNsnCNf0axAEMPZdY98urac";
 	}
 
 	public String getAppid() {
@@ -250,7 +256,6 @@ public class UnifiedOrderRequest extends WXPayRequest {
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Field[] fields1 = this.getClass().getDeclaredFields();
-		Field[] fields2 = super.getClass().getDeclaredFields();
 		for (Field field : fields1) {
 			Object obj;
 			try {

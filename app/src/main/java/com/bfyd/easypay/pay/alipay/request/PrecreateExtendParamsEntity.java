@@ -1,4 +1,4 @@
-package com.bfyd.easypay.pay.alipay;
+package com.bfyd.easypay.pay.alipay.request;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by zyk on 2016/6/6.
  * 业务扩展参数
  */
-public class ExtendParamsEntity {
+public class PrecreateExtendParamsEntity {
 
 	//系统商编号 该参数作为系统商返佣数据提取的依据，请填写系统商签约协议的PID
 	@SerializedName("sys_service_provider_id")

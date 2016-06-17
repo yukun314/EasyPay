@@ -124,18 +124,20 @@ public class DefaultWXpayClient{
         Map<String, Object> map = request.toMap();
         String sign = genSign(map);
         System.out.println("sign:"+sign);
-        request.sign = sign;
+        System.out.println("sign:"+sign);
+        request.setSign(sign);
         String rsp = null;
         String params = "";
         try {
             params = XMLParser.toXML(request);
+            System.out.println("params:"+params);
         } catch (IllegalAccessException e) {
             throw new AlipayApiException("格式化参数错误:"+e);
         } catch (UnsupportedEncodingException e) {
             throw new AlipayApiException("格式化参数错误:"+e);
         }
         try {
-            System.out.println("请求参数:"+params);
+//            System.out.println("请求参数:"+params);
             rsp = WebUtils.doPost(serverUrl, params, charset, connectTimeout,
                         readTimeout);
         } catch (IOException e) {
@@ -165,6 +167,7 @@ public class DefaultWXpayClient{
         String result = sb.toString();
         result += "key=" + WXConfigure.key;
         //Util.log("Sign Before MD5:" + result);
+        System.out.println("md5之前:"+result);
         result = MD5.md5(result).toUpperCase();
         //Util.log("Sign Result:" + result);
         return result;
