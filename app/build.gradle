@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.bfyd.easypay"
-        minSdkVersion 8
+        minSdkVersion 12
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -51,4 +51,6 @@ dependencies {
     compile project(':zxing-core')
     compile 'com.google.code.gson:gson:2.6.2'
     compile project(':alipay')
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile project(':android-QRCode')
 }

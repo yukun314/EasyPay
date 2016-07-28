@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\encode.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\menu\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\menu\\history.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\menu\\history.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\menu\\capture.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\menu\\capture.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\menu\\encode.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\menu\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\history.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\menu\\history.xml"
+    },
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\history.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\menu\\history.xml"
+    },
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\encode.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\menu\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\capture.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\menu\\capture.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\menu\\capture.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\menu\\capture.xml"
+    }
+]

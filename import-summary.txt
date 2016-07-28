@@ -6,14 +6,10 @@ Moved Files:
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => alipay_demo\src\main\AndroidManifest.xml
-* assets\ => alipay_demo\src\main\assets
-* libs\alipaySdk-20160516.jar => alipay_demo\libs\alipaySdk-20160516.jar
-* libs\android-support-v13.jar => alipay_demo\libs\android-support-v13.jar
-* lint.xml => alipay_demo\lint.xml
-* proguard-project.txt => alipay_demo\proguard-project.txt
-* res\ => alipay_demo\src\main\res\
-* src\ => alipay_demo\src\main\java\
+* AndroidManifest.xml => androidsercd\src\main\AndroidManifest.xml
+* jni\ => androidsercd\src\main\jni\
+* res\ => androidsercd\src\main\res\
+* src\ => androidsercd\src\main\java\
 
 Next Steps:
 -----------
