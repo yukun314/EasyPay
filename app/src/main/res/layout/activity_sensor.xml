@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TextView
+		android:id="@+id/activity_sensor_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+
+	<Button
+		android:id="@+id/activity_sensor_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="距离传感器test"/>
+
+	<Button
+		android:id="@+id/activity_sensor_button1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="光传感器test"/>
+</LinearLayout>

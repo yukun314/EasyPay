@@ -46,7 +46,7 @@ public class PrecreateBizContentEntity {
 
 	//订单包含的商品列表信息.Json格式. 其它说明详见：“商品明细说明”
 	@SerializedName("goods_detail")
-	public List<PrecreateGoodsDetailEntity> goods_detail;
+	public List<GoodsDetailEntity> goods_detail;
 
 	//商户操作员编号
 	@SerializedName("operator_id")
@@ -62,7 +62,7 @@ public class PrecreateBizContentEntity {
 
 	//业务扩展参数 Json格式
 	@SerializedName("extend_params")
-	public PrecreateExtendParamsEntity extend_params;
+	public ExtendParamsEntity extend_params;
 
 	//该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。
 	// m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
@@ -71,5 +71,5 @@ public class PrecreateBizContentEntity {
 
 	//描述分账信息，json格式。
 	@SerializedName("royalty_info")
-	public PrecreateRoyaltyInfoEntity royalty_info;
+	public RoyaltyInfoEntity royalty_info;
 }

@@ -167,6 +167,7 @@ public abstract class WebUtils {
             } catch (IOException e) {
                 Map<String, String> map = getParamsFromUrl(url);
                 AlipayLogger.logCommError(e, url, map.get("app_key"), map.get("method"), content);
+                System.out.println("conn IOException:"+e);
                 throw e;
             }
             try {
@@ -176,10 +177,12 @@ public abstract class WebUtils {
             } catch (IOException e) {
                 Map<String, String> map = getParamsFromUrl(url);
                 AlipayLogger.logCommError(e, conn, map.get("app_key"), map.get("method"), content);
+                System.out.println("stream IOException:"+e);
                 throw e;
             }
 
         } finally {
+            System.out.println("try 的 finally 在这里关闭out和conn");
             if (out != null) {
                 out.close();
             }

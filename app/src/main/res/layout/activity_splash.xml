@@ -27,5 +27,35 @@
 		android:layout_marginTop="10dp"
 		android:layout_below="@id/activity_splash_button2"/>
 
+	<Button
+		android:id="@+id/activity_splash_button4"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Socket test"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/activity_splash_button3"/>
 
+	<Button
+		android:id="@+id/activity_splash_button5"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="传感器test"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/activity_splash_button4"/>
+
+	<Button
+		android:id="@+id/activity_splash_button6"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="退款test"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/activity_splash_button5"/>
+
+	<Button
+		android:id="@+id/activity_splash_button7"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="SerialTest"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/activity_splash_button6"/>
 </RelativeLayout>

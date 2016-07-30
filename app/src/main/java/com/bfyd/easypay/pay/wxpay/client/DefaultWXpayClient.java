@@ -13,6 +13,7 @@ import com.bfyd.easypay.pay.wxpay.XMLParser;
 import com.bfyd.easypay.utils.MD5;
 import com.alipay.api.internal.util.StringUtils;
 import com.alipay.api.internal.util.WebUtils;
+import com.bfyd.easypay.utils.WXUtils;
 
 import org.json.JSONException;
 import org.xml.sax.SAXException;
@@ -88,7 +89,7 @@ public class DefaultWXpayClient{
                 //微信接口可能增加字段，验证签名时必须支持增加的扩展字段
                 //这里验证不使用T的字段
                 Map<String, Object> map = XMLParser.getMapFromXML(rsp);
-                String newSign = genSign(map);
+                String newSign = WXUtils.genSign(map);
                 //微信返回的签名
                 String oldSign = (String)map.get("sign");
                 if(!(newSign.equals(oldSign) | newSign == oldSign)){
@@ -122,9 +123,7 @@ public class DefaultWXpayClient{
         }
 
         Map<String, Object> map = request.toMap();
-        String sign = genSign(map);
-        System.out.println("sign:"+sign);
-        System.out.println("sign:"+sign);
+        String sign = WXUtils.genSign(map);
         request.setSign(sign);
         String rsp = null;
         String params = "";
@@ -146,31 +145,6 @@ public class DefaultWXpayClient{
         return rsp;
     }
 
-    //生成签名
-    private String genSign(Map<String, Object> params) {
-        ArrayList<String> list = new ArrayList<String>();
-        for(Map.Entry<String,Object> entry:params.entrySet()){
-            if(entry.getValue()!=""){
-                String name = entry.getKey();
-                if(!(name.equals("sign") || name == "sign")) {//签名字段不参与签名
-                    list.add(name + "=" + entry.getValue() + "&");
-                }
-            }
-        }
-        int size = list.size();
-        String [] arrayToSort = list.toArray(new String[size]);
-        Arrays.sort(arrayToSort, String.CASE_INSENSITIVE_ORDER);
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < size; i ++) {
-            sb.append(arrayToSort[i]);
-        }
-        String result = sb.toString();
-        result += "key=" + WXConfigure.key;
-        //Util.log("Sign Before MD5:" + result);
-        System.out.println("md5之前:"+result);
-        result = MD5.md5(result).toUpperCase();
-        //Util.log("Sign Result:" + result);
-        return result;
-    }
+
 
 }

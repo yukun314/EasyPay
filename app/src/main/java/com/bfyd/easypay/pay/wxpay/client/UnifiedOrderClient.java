@@ -8,10 +8,8 @@ import com.bfyd.easypay.pay.wxpay.WXConfigure;
  */
 public class UnifiedOrderClient extends DefaultWXpayClient {
 
-	private static final String format = "json";
-	private static final String charset = "UTF-8";
 
 	public UnifiedOrderClient() {
-		super(WXConfigure.UNIFIEDORDER_API, format, charset);
+		super(WXConfigure.UNIFIEDORDER_API,  WXConfigure.format, WXConfigure.charset);
 	}
 }

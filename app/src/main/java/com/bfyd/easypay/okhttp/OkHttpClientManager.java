@@ -37,12 +37,13 @@ public class OkHttpClientManager {
 	/**
 	 *
 	 * @param domain 模块名
-	 * @param params 参数
+	 * @param param 参数
 	 */
 	public static <T extends BaseRequest> void request(final String domain,T param , final ClientCallback responseCallback) {
 		//创建okHttpClient对象
 		OkHttpClient mOkHttpClient = new OkHttpClient();
 		String url = NetworkUtils.BaseURL+"/"+domain;
+//		String url = NetworkUtils.ServerURL;
 		System.out.println("url:"+url);
 
 //		//创建一个Request

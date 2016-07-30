@@ -13,15 +13,22 @@
 		android:id="@+id/activity_wxtest_button"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-	    android:text="test"
+	    android:text="二维码支付test"
 	android:layout_below="@id/activity_wxtest_message"/>
 
 	<Button
 		android:id="@+id/activity_wxtest_button1"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="查询test"
+		android:text="被扫支付test"
 		android:layout_below="@id/activity_wxtest_button"/>
+
+	<Button
+		android:id="@+id/activity_wxtest_button2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="退款test"
+		android:layout_below="@id/activity_wxtest_button1"/>
 
 	<ImageView
 		android:id="@+id/activity_wxtest_image"

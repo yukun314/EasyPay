@@ -87,10 +87,9 @@ public class UnifiedOrderRequest extends WXPayRequest {
 		//随机字符串，不长于32 位
 		this.nonce_str = StringUtils.getRandomStringByLength(32);
 		this.spbill_create_ip = NetworkUtils.GetIp(context);
-//		this.trade_type = "NATIVE";
-		this.trade_type = "JSAPI";
+		this.trade_type = "NATIVE";
 		this.notify_url = WXConfigure.notifyUrl;
-		this.openid = "ozwo9uNsnCNf0axAEMPZdY98urac";
+		this.openid = WXConfigure.openId;
 	}
 
 	public String getAppid() {

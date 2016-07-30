@@ -16,19 +16,19 @@ public abstract class AlipayResponse implements Serializable {
     private static final long   serialVersionUID = 5014379068811962022L;
 
     @ApiField("code")
-    private String              code;
+    public String              code;
 
     @ApiField("msg")
-    private String              msg;
+    public String              msg;
 
     @ApiField("sub_code")
-    private String              subCode;
+    public String              subCode;
 
     @ApiField("sub_msg")
-    private String              subMsg;
+    public String              subMsg;
 
-    private String              body;
-    private Map<String, String> params;
+    public String              body;
+    public Map<String, String> params;
 
     /**
      * 废弃方法，请使用getCode替换

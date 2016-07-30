@@ -33,6 +33,7 @@ public class OkHttpCallback <T extends BaseResponse> implements Callback {
 			if(str == null || str.length() == 0){
 				error("服务器没有任何返回","");
 			}else {
+				System.out.println("服务器返回的原数据:"+str);
 				try {
 					Gson gson = new Gson();
 					T r = gson.fromJson(str, clazz);

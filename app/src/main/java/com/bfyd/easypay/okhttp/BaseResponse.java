@@ -5,9 +5,17 @@ package com.bfyd.easypay.okhttp;
  */
 public class BaseResponse {
 
+	//返回状态码
 	public int returnCode;
 
+	//返回信息
 	public String returnMsg;
+
+	//随机字符串
+	public String nonceStr;
+
+	//签名
+	public String sign;
 
 	//服务器返回的原数据
 	public String body;

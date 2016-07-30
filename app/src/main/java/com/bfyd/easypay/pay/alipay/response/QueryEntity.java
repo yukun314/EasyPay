@@ -7,6 +7,11 @@ import com.alipay.api.domain.TradeFundBill;
  */
 public class QueryEntity {
 
+	public String code;
+	public String msg;
+	public String sub_code;
+	public String sub_msg;
+
 	//支付宝交易号
 	public String trade_no;
 

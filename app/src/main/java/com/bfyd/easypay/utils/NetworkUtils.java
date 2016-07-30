@@ -22,11 +22,14 @@ public class NetworkUtils {
 //
 //    public static final String ServerURL = BaseURL+"/AppInterface/update";
 
-    public static final String BaseURL = "http://192.168.1.107:8080/AppInterface";
+    public static final String BaseURL = "http://emo.mobi";
 
-    public static final String ServerURL = BaseURL + "/app1/api.php";
+    public static final String ServerURL = BaseURL + "//app.php";
 
     public static final String UpdateURL = ServerURL + "/update";
+
+//    public static final String PayURL = BaseURL+"/pay";
+    public static final String PayURL = "http://emocc.applinzi.com/api.php";
 
     public static final String MessageServerURL = "tcp://192.168.1.104:1883";
 

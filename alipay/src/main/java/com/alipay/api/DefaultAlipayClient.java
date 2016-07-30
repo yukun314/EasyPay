@@ -89,7 +89,7 @@ public class DefaultAlipayClient implements AlipayClient {
         } else {
             parser = new ObjectJsonParser<T>(request.getResponseClass());
         }
-
+        System.out.println("AlipayRequest:"+request.toString());
         return _execute(request, parser, accessToken);
     }
 
@@ -101,9 +101,10 @@ public class DefaultAlipayClient implements AlipayClient {
         }
         T tRsp = null;
         try {
+            System.out.println("_execute rsp:"+rt.get("rsp"));
             tRsp = parser.parse((String) rt.get("rsp"));
             tRsp.setBody((String) rt.get("rsp"));
-            System.out.println("rsp:"+rt.get("rsp"));
+
             // 针对成功结果且有支付宝公钥的进行验签
             if (!StringUtils.isEmpty(this.alipayPublicKey)) {
 
@@ -142,7 +143,6 @@ public class DefaultAlipayClient implements AlipayClient {
                         }
                     }
                 }
-
             }
 
         } catch (RuntimeException e) {
@@ -243,6 +243,7 @@ public class DefaultAlipayClient implements AlipayClient {
         } catch (IOException e) {
             throw new AlipayApiException(e);
         }
+        System.out.println("doPost rsp:"+rsp);
         result.put("rsp", rsp);
         result.put("textParams", appParams);
         result.put("protocalMustParams", protocalMustParams);

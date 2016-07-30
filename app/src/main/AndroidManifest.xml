@@ -8,9 +8,8 @@
 	<!-- 添加对SDCARD的写权限 -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-feature android:name="android.hardware.usb.host" />
+	<uses-permission android:name="android.hardware.usb.host" />
 
 	<application
 		android:allowBackup="true"
@@ -29,6 +28,13 @@
 		<activity android:name=".activity.WXTestActivity"/>
 		<activity android:name=".activity.AliPayActivity"/>
 		<activity android:name=".activity.OkHttpTest"/>
+		<activity android:name=".activity.SocketTest"/>
+		<activity android:name=".activity.SensorTest"/>
+		<activity android:name=".activity.RefundActivity"/>
+		<activity android:name=".activity.ProlificSerialActivity"/>
+		<activity android:name=".serial.ProlificSerialSettingActivity"/>
+
+		<service android:name=".service.ProlificSerialService"/>
 	</application>
 
 </manifest>

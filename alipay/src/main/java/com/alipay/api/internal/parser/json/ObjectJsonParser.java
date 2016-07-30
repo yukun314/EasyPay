@@ -26,8 +26,10 @@ public class ObjectJsonParser<T extends AlipayResponse> implements AlipayParser<
     public T parse(String rsp) throws AlipayApiException {
         Converter converter = new JsonConverter();
 //        rsp = rsp.replace("\"","");
-        rsp = rsp.substring(rsp.indexOf("{",2), rsp.indexOf("}")+1);
-//        System.out.println("截取之后rsp:"+rsp);
+//        rsp = rsp.substring(rsp.indexOf("{",2), rsp.indexOf("}")+1);
+        rsp = rsp.substring(rsp.indexOf("{",2), rsp.lastIndexOf("}"));
+        rsp = rsp.substring(0,rsp.lastIndexOf("}")+1);
+        System.out.println("截取之后rsp:"+rsp);
         Gson gson = new Gson();
         return gson.fromJson(rsp, clazz);
 //        return converter.toResponse(rsp, clazz);

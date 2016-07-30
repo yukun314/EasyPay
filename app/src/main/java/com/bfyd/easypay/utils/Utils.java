@@ -10,9 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -41,9 +43,6 @@ import java.util.UUID;
  * Created by zyk on 2016/3/15.
  */
 public class Utils {
-
-    private static int latitude = -1;
-    private static int longitude = -1;
 
     /**
      * Returns the screen/display size
@@ -163,99 +162,41 @@ public class Utils {
         return result;
     }
 
-    /**
-     * 获取当前位置的经度
-     * @return
-     */
-    public static String getLongitude(Activity context) {
-        IntegerOption option = new IntegerOption("option","longitude",0);
-        longitude = option.getValue();
-        if(longitude <= 0) {
-            getLatitudeAndLongitude(context);
-            if (longitude < 0) {
-                longitude = 0;//默认
-            }
-        }
-        System.out.println("latitude:"+longitude);
-        System.out.println("int latitude:"+Integer.toString(longitude));
-        return String.format("%1$03d", Integer.toString(longitude));
-    }
 
-    /**
-     * 获取当前位置的纬度
-     * @return
-     */
-    public static String getLatitude(Activity context) {
-        IntegerOption option = new IntegerOption("option","latitude",0);
-        latitude = option.getValue();
-        if(latitude <= 0) {
-            getLatitudeAndLongitude(context);
-            if (latitude < 0) {
-                latitude = 0;//默认
-            }
-        }
-
-        System.out.println("latitude:"+latitude);
-        System.out.println("int latitude:"+Integer.toString(latitude));
-        return String.format("%1$03d", Integer.toString(latitude));
-    }
-
-    public static void getLatitudeAndLongitude(final Activity context) {
-        if(latitude > 0 || longitude > 0) {
-            return;
-        }
-        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        LocationProvider netProvider = locationManager.getProvider(LocationManager.NETWORK_PROVIDER);//通过网络定位
-        System.out.println("netProvider is null");
-        if (netProvider != null) {
-            System.out.println("netProvider != null");
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                System.out.println("netProvider 有权限");
-                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                if(location != null) {
-                    System.out.println("location ！= null");
-                    latitude = (int)Math.abs(location.getLatitude());
-                    longitude = (int)Math.abs(location.getLongitude());
-                    System.out.println("latitude:"+latitude);
-                    System.out.println("longitude:"+longitude);
-                    IntegerOption option1 = new IntegerOption("option","latitude",latitude);
-                    option1.setValue(latitude);
-                    IntegerOption option2 = new IntegerOption("option","longitude",longitude);
-                    option2.setValue(longitude);
-                }
-            }
-
-        } else {
-            //无法定位：1、提示用户打开定位服务；2、跳转到设置界面
-            context.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, "无法定位，请打开定位服务", Toast.LENGTH_SHORT).show();
-                }
-            });
-            Intent i = new Intent();
-            i.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            context.startActivity(i);
-        }
-    }
-
-    public static String getOutTradeNo(Activity context){
+    public static String getOutTradeNo(){
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String result = format.format(date);
-        System.out.println("时间:"+result);
-        result += getLongitude(context);
-        System.out.println("+经度:"+result);
+        result += getTimestamp(true);
         result += StringUtils.getRandomNumberByLength(1);
-        System.out.println("+1位随机数:"+result);
         result += StringUtils.getRandomNumberByLength(6);
-        System.out.println("+6位随机数:"+result);
-        result += getLatitude(context);
-        System.out.println("+纬度:"+result);
+        result += getTimestamp(false);
         result += StringUtils.getRandomNumberByLength(1);
-        System.out.println("+1位随机数:"+result);
         return result;
+    }
+
+    private static String getTimestamp(boolean isOne){
+        String value;
+        StringOption option;
+        if(isOne) {
+            option = new StringOption("option", "tradeOne", "");
+            value = option.getValue();
+        } else {
+            option = new StringOption("option", "tradeTwo", "");
+            value = option.getValue();
+        }
+        if(value != null && value.length() >1){
+            return value;
+        }
+        Date date = new Date();
+        long timestamp = date.getTime()/1000;
+        if(!isOne) {
+            timestamp += (long)Math.random()*9;
+        }
+        value = timestamp+"";
+        value = value.substring(value.length()-3);
+        option.setValue(value);
+        return value;
     }
 
 }
