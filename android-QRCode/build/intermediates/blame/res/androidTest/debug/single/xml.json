@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\preferences.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\preferences.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\xml\\preferences.xml"
+    }
+]

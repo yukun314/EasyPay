@@ -11,7 +11,9 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.bfyd.easypay.serial.CustomerDisplayEntity;
+import com.bfyd.easypay.serial.PrinterDataEntity;
 import com.bfyd.easypay.serial.ProlificSerialDriver;
+import com.bfyd.easypay.serial.SerialEntity;
 import com.bfyd.easypay.utils.HexDump;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class ProlificSerialService extends Service {
 	private UsbDevice mUsbDevice;
 	private Thread receiveThread;
 	private boolean isStop = false;
+	private boolean isCustomerDisplay = true;
 
 	@Override
 	public void onCreate() {
@@ -77,7 +80,7 @@ public class ProlificSerialService extends Service {
 			int len = data.length;
 			String s = "";
 			for(int i=0;i<len;i++){
-				s += data[i]+"  ";
+				s += (data[i]& 0xFF)+"  ";
 			}
 			System.out.println("data:"+s);
 			String str = HexDump.dumpHexString(data);
@@ -88,7 +91,11 @@ public class ProlificSerialService extends Service {
 	private void sendMessage(int flag, String message ,byte []data){
 		if(onReceivedMessage != null){
 			System.out.println("收到的信息:"+message);
-			onReceivedMessage.onReceivedMessage(flag, message, new CustomerDisplayEntity(data));
+			if(isCustomerDisplay) {
+				onReceivedMessage.onReceivedMessage(flag, message, new CustomerDisplayEntity(data));
+			}else{
+				onReceivedMessage.onReceivedMessage(flag, message, new PrinterDataEntity(data));
+			}
 		}
 	}
 
@@ -141,14 +148,18 @@ public class ProlificSerialService extends Service {
 		public void setOnReceiced(OnReceivedMessageListener rml){
 			onReceivedMessage = rml;
 		}
+
+		public void setCustomerDisplay(boolean iscd){
+			isCustomerDisplay = iscd;
+		}
 	}
 
 	public interface OnReceivedMessageListener{
 		/**
 		 * @param flag 0 正常信息 其他值 错误信息
 		 * @param errorMsg 错误信息 flag为其他值时的提示信息
-		 * @param cde 解析出来的数据
+		 * @param se 解析出来的数据
 		 */
-		void onReceivedMessage(int flag, String errorMsg, CustomerDisplayEntity cde);
+		void onReceivedMessage(int flag, String errorMsg, SerialEntity se);
 	}
 }

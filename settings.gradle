@@ -1,1 +1,1 @@
-include ':app', ':zxing-core', ':wxpay', ':library', ':alipay'
+include ':app', ':zxing-core', ':wxpay', ':library', ':alipay', ':android-QRCode', ':usbserialforandroid', ':usbserialexamples'

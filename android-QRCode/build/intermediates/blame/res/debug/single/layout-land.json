@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-land\\share.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\layout-land\\share.xml"
+    },
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-land\\encode.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\layout-land\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\layout-land\\share.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\layout-land\\share.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\layout-land\\encode.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\layout-land\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-land\\share.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\layout-land\\share.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-land\\encode.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\layout-land\\encode.xml"
+    }
+]

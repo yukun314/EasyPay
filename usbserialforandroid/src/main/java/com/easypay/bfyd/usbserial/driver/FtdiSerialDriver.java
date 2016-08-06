@@ -276,6 +276,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
 
         @Override
         public int read(byte[] dest, int timeoutMillis) throws IOException {
+            System.out.println("FtdiSerialDriver read");
             final UsbEndpoint endpoint = mDevice.getInterface(0).getEndpoint(0);
 
             if (ENABLE_ASYNC_READS) {

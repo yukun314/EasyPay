@@ -147,6 +147,7 @@ public class Ch34xSerialDriver implements UsbSerialDriver {
 
 		@Override
 		public int read(byte[] dest, int timeoutMillis) throws IOException {
+			System.out.println("Ch34xSerialDriver read");
 			final int numBytesRead;
 			synchronized (mReadBufferLock) {
 				int readAmt = Math.min(dest.length, mReadBuffer.length);

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="16"
+    density="hdpi"
+    format="7"
+    timestamp="24571314586020"
+    verifier="COMPATIBLE" >
+
+    <task
+        name="javac"
+        duration="659" />
+    <task
+        name="instant-run-dex"
+        duration="1570" />
+    <task
+        name="instant-run-transform"
+        duration="18" />
+    <task
+        name="verifier"
+        duration="4" />
+
+    <artifact
+        location="D:\android\WisdomCommunity\android-QRCode\build\intermediates\res\resources-debug.ap_"
+        type="RESOURCES" />
+    <artifact
+        location="D:\android\WisdomCommunity\android-QRCode\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
+
+    <build timestamp="23922449244539" >
+        <artifact
+            location="D:\android\WisdomCommunity\android-QRCode\build\outputs\apk\android-QRCode-debug.apk"
+            type="MAIN" />
+    </build>
+    <build
+        timestamp="24014960456307"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\android\WisdomCommunity\android-QRCode\build\intermediates\builds\debug\24014960456307\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="24571314586020"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\android\WisdomCommunity\android-QRCode\build\intermediates\res\resources-debug.ap_"
+            type="RESOURCES" />
+        <artifact
+            location="D:\android\WisdomCommunity\android-QRCode\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+
+</instant-run>

@@ -162,7 +162,7 @@ public class DeviceListActivity extends Activity {
             @Override
             protected List<UsbSerialPort> doInBackground(Void... params) {
                 Log.d(TAG, "Refreshing device list ...");
-                SystemClock.sleep(1000);
+                SystemClock.sleep(10000);
 
                 final List<UsbSerialDriver> drivers =
                         UsbSerialProber.getDefaultProber().findAllDrivers(mUsbManager);

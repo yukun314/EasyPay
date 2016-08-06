@@ -1,0 +1,150 @@
+[
+    {
+        "outputFile": "D:\\android\\EasyPay\\serialport-api\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 33,
+                    "endColumn": 19,
+                    "endOffset": 920
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\baudrates.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endLine": 34,
+                        "endColumn": 19,
+                        "endOffset": 955
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 925,
+                    "endLine": 65,
+                    "endColumn": 19,
+                    "endOffset": 1791
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\baudrates.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 4,
+                        "startOffset": 961,
+                        "endLine": 66,
+                        "endColumn": 19,
+                        "endOffset": 1858
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 1796,
+                    "endLine": 86,
+                    "endColumn": 10,
+                    "endOffset": 2615
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 120,
+                        "endLine": 24,
+                        "endColumn": 10,
+                        "endOffset": 959
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 2620,
+                    "endColumn": 59,
+                    "endOffset": 2675
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 59,
+                        "endOffset": 114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 2680,
+                    "endColumn": 88,
+                    "endOffset": 2764
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 965,
+                        "endColumn": 88,
+                        "endOffset": 1049
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 2769,
+                    "endLine": 90,
+                    "endColumn": 16,
+                    "endOffset": 2867
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1055,
+                        "endLine": 27,
+                        "endColumn": 16,
+                        "endOffset": 1154
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 2872,
+                    "endLine": 92,
+                    "endColumn": 18,
+                    "endOffset": 2968
+                },
+                "from": {
+                    "file": "D:\\android\\EasyPay\\serialport-api\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 1160,
+                        "endLine": 29,
+                        "endColumn": 18,
+                        "endOffset": 1257
+                    }
+                }
+            }
+        ]
+    }
+]

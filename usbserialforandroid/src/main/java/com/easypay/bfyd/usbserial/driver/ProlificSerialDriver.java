@@ -224,7 +224,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        private final int getStatus() throws IOException {
+        private final int  getStatus() throws IOException {
             if ((mReadStatusThread == null) && (mReadStatusException == null)) {
                 synchronized (mReadStatusThreadLock) {
                     if (mReadStatusThread == null) {
@@ -373,6 +373,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
 
         @Override
         public int read(byte[] dest, int timeoutMillis) throws IOException {
+            System.out.println("ProlificSerialDriver read");
             synchronized (mReadBufferLock) {
                 int readAmt = Math.min(dest.length, mReadBuffer.length);
                 int numBytesRead = mConnection.bulkTransfer(mReadEndpoint, mReadBuffer,

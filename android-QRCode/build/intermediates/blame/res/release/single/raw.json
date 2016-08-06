@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\release\\raw\\beep.ogg",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\raw\\beep.ogg"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\release\\raw\\beep.ogg",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\raw\\beep.ogg"
+    }
+]

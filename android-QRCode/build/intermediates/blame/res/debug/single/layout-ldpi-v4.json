@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-ldpi-v4\\capture.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\src\\main\\res\\layout-ldpi\\capture.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\debug\\layout-ldpi-v4\\capture.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\src\\main\\res\\layout-ldpi\\capture.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android\\build\\intermediates\\res\\merged\\debug\\layout-ldpi-v4\\capture.xml",
+        "source": "D:\\android\\WisdomCommunity\\android\\src\\main\\res\\layout-ldpi\\capture.xml"
+    }
+]

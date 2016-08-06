@@ -5,17 +5,22 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bfyd.easypay.R;
 import com.bfyd.easypay.serial.CustomerDisplayEntity;
+import com.bfyd.easypay.serial.PrinterDataEntity;
 import com.bfyd.easypay.serial.ProlificSerialSettingActivity;
+import com.bfyd.easypay.serial.SerialEntity;
 import com.bfyd.easypay.service.ProlificSerialService;
 
 import org.w3c.dom.Text;
@@ -25,6 +30,9 @@ import org.w3c.dom.Text;
  */
 public class ProlificSerialActivity extends Activity implements ProlificSerialService.OnReceivedMessageListener{
 
+	private boolean isCustomerDisplay = true;
+	private CheckBox mCheckBox;
+	private ImageView mImageView;
 	private TextView mMessage;
 	private Handler mHandler = new Handler(){
 		@Override
@@ -32,7 +40,16 @@ public class ProlificSerialActivity extends Activity implements ProlificSerialSe
 			super.handleMessage(msg);
 			if(msg.what == 0){
 				String s = mMessage.getText().toString();
-				mMessage.setText(s+"\n-->"+msg.obj);
+				String result ;
+				if(!isCustomerDisplay) {
+					PrinterDataEntity pde = (PrinterDataEntity)msg.obj;
+					mImageView.setImageBitmap(pde.mBitmap);
+					result = pde.result;
+				}else{
+					result = (String)msg.obj;
+				}
+				mMessage.setText(s+"\n-->"+result);
+
 			}
 		}
 	};
@@ -45,7 +62,15 @@ public class ProlificSerialActivity extends Activity implements ProlificSerialSe
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder binder) {
-			((ProlificSerialService.MsgBinder)binder).setOnReceiced(ProlificSerialActivity.this);
+			ProlificSerialService.MsgBinder msbinder = (ProlificSerialService.MsgBinder)binder;
+			msbinder.setOnReceiced(ProlificSerialActivity.this);
+			if(mCheckBox!= null && mCheckBox.isChecked()) {
+				msbinder.setCustomerDisplay(true);
+				isCustomerDisplay = true;
+			}else{
+				msbinder.setCustomerDisplay(false);
+				isCustomerDisplay = false;
+			}
 		}
 	};
 	@Override
@@ -53,7 +78,8 @@ public class ProlificSerialActivity extends Activity implements ProlificSerialSe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prolic_serial);
 		mMessage = (TextView) findViewById(R.id.activity_prolic_serial_message);
-
+		mCheckBox = (CheckBox) findViewById(R.id.activity_prolic_serial_cb);
+		mImageView = (ImageView) findViewById(R.id.activity_prolic_serial_image);
 		Button button = (Button) findViewById(R.id.activity_prolic_serial_button);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -64,10 +90,18 @@ public class ProlificSerialActivity extends Activity implements ProlificSerialSe
 			}
 		});
 
-		//绑定Service
-		Intent intent = new Intent();
-		intent.setClass(this,ProlificSerialService.class);
-		bindService(intent, conn, Context.BIND_AUTO_CREATE);
+		Button buttons = (Button) findViewById(R.id.activity_prolic_serial_star);
+		buttons.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//绑定Service
+				Intent intent = new Intent();
+				intent.setClass(ProlificSerialActivity.this,ProlificSerialService.class);
+				bindService(intent, conn, Context.BIND_AUTO_CREATE);
+			}
+		});
+
+
 	}
 
 	@Override
@@ -78,12 +112,16 @@ public class ProlificSerialActivity extends Activity implements ProlificSerialSe
 
 	//收到信息
 	@Override
-	public void onReceivedMessage(int flag, String message, CustomerDisplayEntity cde) {
+	public void onReceivedMessage(int flag, String message, SerialEntity se) {
 		Message m = new Message();
 		m.what = 0;
 		if(flag == 0){
 			System.out.println("收到信息:"+message);
-			m.obj = cde.toString();
+			if(isCustomerDisplay) {
+				m.obj = se.toString();
+			}else{
+				m.obj = se;
+			}
 		} else {
 			System.out.println("错误:"+message);
 			m.obj = message;

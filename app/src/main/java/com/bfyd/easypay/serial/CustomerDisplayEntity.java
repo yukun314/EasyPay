@@ -7,9 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by zyk on 2016/7/29.
- * 把接收到的数据解析到相应的各个字段
+ * 把接收到的数据解析到客显相应的各个字段
  */
-public class CustomerDisplayEntity {
+public class CustomerDisplayEntity extends SerialEntity{
 
 	public static final int NONE = 0;//全暗
 	public static final int UNITPRICE = 1;//单价亮

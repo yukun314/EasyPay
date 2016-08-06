@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\share.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\layout-land\\share.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\share.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\layout-land\\share.xml"
+    },
+    {
+        "merged": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\encode.xml",
+        "source": "D:\\android\\EasyPay\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\layout-land\\encode.xml"
+    },
+    {
+        "merged": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\encode.xml",
+        "source": "D:\\android\\WisdomCommunity\\android-QRCode\\build\\intermediates\\bundles\\debug\\res\\layout-land\\encode.xml"
+    }
+]
