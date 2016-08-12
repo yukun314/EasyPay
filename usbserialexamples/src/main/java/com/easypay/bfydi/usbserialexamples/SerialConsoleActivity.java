@@ -204,7 +204,7 @@ public class SerialConsoleActivity extends Activity {
 //
                 try {
                     sPort.open(connection);
-                    sPort.setParameters(2400, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+                    sPort.setParameters(9600, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
 
                     showStatus(mDumpTextView, "CD  - Carrier Detect", sPort.getCD());
                     showStatus(mDumpTextView, "CTS - Clear To Send", sPort.getCTS());

@@ -1,15 +1,26 @@
 ECLIPSE ANDROID PROJECT IMPORT SUMMARY
 ======================================
 
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* META-INF\
+* META-INF\MANIFEST.MF
+* build.properties
+* default.properties
+
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => androidsercd\src\main\AndroidManifest.xml
-* jni\ => androidsercd\src\main\jni\
-* res\ => androidsercd\src\main\res\
-* src\ => androidsercd\src\main\java\
+* AndroidManifest.xml => bluetoothBee\src\main\AndroidManifest.xml
+* assets\ => bluetoothBee\src\main\assets
+* res\ => bluetoothBee\src\main\res\
+* src\ => bluetoothBee\src\main\java\
 
 Next Steps:
 -----------

@@ -41,7 +41,7 @@ public class SerialInputOutputManager implements Runnable {
     private static final boolean DEBUG = true;
 
     private static final int READ_WAIT_MILLIS = 200;
-    private static final int BUFSIZ = 4096;
+    private static final int BUFSIZ = 16*1024;
 
     private final UsbSerialPort mDriver;
 

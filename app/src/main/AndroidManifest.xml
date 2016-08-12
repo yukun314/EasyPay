@@ -10,6 +10,7 @@
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 	<uses-feature android:name="android.hardware.usb.host" />
 	<uses-permission android:name="android.hardware.usb.host" />
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
 
 	<application
 		android:allowBackup="true"
@@ -33,6 +34,7 @@
 		<activity android:name=".activity.RefundActivity"/>
 		<activity android:name=".activity.ProlificSerialActivity"/>
 		<activity android:name=".serial.ProlificSerialSettingActivity"/>
+		<activity android:name=".activity.BluetoothActivity"/>
 
 		<service android:name=".service.ProlificSerialService"/>
 	</application>

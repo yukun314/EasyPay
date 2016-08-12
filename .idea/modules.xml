@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EasyPay.iml" filepath="$PROJECT_DIR$/EasyPay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alipay/alipay.iml" filepath="$PROJECT_DIR$/alipay/alipay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-QRCode/android-QRCode.iml" filepath="$PROJECT_DIR$/android-QRCode/android-QRCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bluetoothBee/bluetoothBee.iml" filepath="$PROJECT_DIR$/bluetoothBee/bluetoothBee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usbserialexamples/usbserialexamples.iml" filepath="$PROJECT_DIR$/usbserialexamples/usbserialexamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/usbserialforandroid/usbserialforandroid.iml" filepath="$PROJECT_DIR$/usbserialforandroid/usbserialforandroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wxpay/wxpay.iml" filepath="$PROJECT_DIR$/wxpay/wxpay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing-core/zxing-core.iml" filepath="$PROJECT_DIR$/zxing-core/zxing-core.iml" />
+    </modules>
+  </component>
+</project>

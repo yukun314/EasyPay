@@ -24,7 +24,7 @@ public class PrinterDataEntity extends SerialEntity{
 	public PrinterDataEntity(byte [] data){
 		int length = data.length;
 		System.out.println("data.length:"+data.length);
-		StringBuffer buffer = new StringBuffer();
+//		StringBuffer buffer = new StringBuffer();
 		for(int i = 0;i<length;i++){
 			byte d = data[i];
 			if(byteToInt(d) == 10){//换行
@@ -62,24 +62,24 @@ public class PrinterDataEntity extends SerialEntity{
 					if(m == 32 | m == 33){
 						k = 3*k;
 					}
-					int dstPos = 0;
-					if(bitmapdata == null){
-						bitmapdata = new byte[k];
-					}else{
-						byte[]old = bitmapdata;
-						dstPos = old.length;
-						bitmapdata = new byte[dstPos+k];
-					}
-					System.arraycopy(data, i, bitmapdata, dstPos, k);
+//					int dstPos = 0;
+//					if(bitmapdata == null){
+//						bitmapdata = new byte[k];
+//					}else{
+//						byte[]old = bitmapdata;
+//						dstPos = old.length;
+//						bitmapdata = new byte[dstPos+k];
+//					}
+//					System.arraycopy(data, i, bitmapdata, dstPos, k);
 
-					byte [] aa = new byte[k];
-					System.arraycopy(data, i, aa, 0, k);
-					System.out.println(HexDump.dumpHexString(aa));
-					System.out.println("i="+i);
-//					i+=k;
-					System.out.println("i="+i);
-
-					System.out.println("m:"+m+" n1:"+n1+"  n2:"+n2);
+//					byte [] aa = new byte[k];
+//					System.arraycopy(data, i, aa, 0, k);
+//					System.out.println(HexDump.dumpHexString(aa));
+//					System.out.println("i="+i);
+					i+=k;
+//					System.out.println("i="+i);
+//
+//					System.out.println("m:"+m+" n1:"+n1+"  n2:"+n2);
 				}
 				star = i+1;
 			}else if(byteToInt(d) == 28){//1c

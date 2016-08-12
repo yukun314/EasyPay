@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:padding="10dip">
+
+<RelativeLayout android:id="@+id/editPanel"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true">
+	
+	<Button 
+		android:id="@+id/buttonSend"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="Send"
+		android:onClick="onButtonClicksend" 
+		android:layout_alignParentRight="true">
+	>	
+	</Button>
+	
+	<EditText
+		android:id="@+id/sEditText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toLeftOf="@+id/buttonSend">
+	>
+	</EditText>
+
+</RelativeLayout>
+
+<ScrollView
+android:id="@+id/widget33"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+>
+
+	<TextView 
+		android:id="@+id/sTextView"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@+id/sEditText"
+	>
+	</TextView>
+
+</ScrollView>
+
+</LinearLayout>

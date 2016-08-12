@@ -58,4 +58,12 @@
 		android:text="SerialTest"
 		android:layout_marginTop="10dp"
 		android:layout_below="@id/activity_splash_button6"/>
+
+	<Button
+		android:id="@+id/activity_splash_button8"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="蓝牙"
+		android:layout_marginTop="10dp"
+		android:layout_below="@id/activity_splash_button7"/>
 </RelativeLayout>

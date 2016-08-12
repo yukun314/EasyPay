@@ -30,7 +30,6 @@ public class ProlificSerialService extends Service {
 	private OnReceivedMessageListener onReceivedMessage;
 	private ProlificSerialDriver mSerialDriver;
 	private UsbManager mUsbManager;
-	private UsbDevice mUsbDevice;
 	private Thread receiveThread;
 	private boolean isStop = false;
 	private boolean isCustomerDisplay = true;
@@ -51,7 +50,7 @@ public class ProlificSerialService extends Service {
 					while(!isStop){
 						try {
 							byte[] data = mSerialDriver.read();
-							if(data != null) {
+							if(data != null && data.length >0) {
 								processReceiveData(data);
 							}
 						} catch (IOException e) {
@@ -91,6 +90,7 @@ public class ProlificSerialService extends Service {
 	private void sendMessage(int flag, String message ,byte []data){
 		if(onReceivedMessage != null){
 			System.out.println("收到的信息:"+message);
+			onReceivedMessage.print(data);
 			if(isCustomerDisplay) {
 				onReceivedMessage.onReceivedMessage(flag, message, new CustomerDisplayEntity(data));
 			}else{
@@ -113,25 +113,31 @@ public class ProlificSerialService extends Service {
 //				Map.Entry<String,UsbDevice> entry = entries.next();
 //				System.out.println("entry.Key:"+entry.getKey()+"   entry.values:"+entry.getValue());
 //			}
+			Context context = getApplicationContext();
 			while (deviceIterator.hasNext()) {
 				UsbDevice device = deviceIterator.next();
 				// 保存设备VID和PID
 				int VendorID = device.getVendorId();
 				int ProductID = device.getProductId();
-
+				System.out.println("device:"+device);
 				System.out.println("生产商 vendorId:" + VendorID);
 				System.out.println("产品 ProductID:" + ProductID);
 				SharedPreferences sp = getApplicationContext().getSharedPreferences("serial", Context.MODE_PRIVATE);
 				// 保存匹配到的设备
 				if (VendorID == sp.getInt("VendorId",1659) && ProductID == sp.getInt("Product",8963)) {
-					mUsbDevice = device; // 获取USBDevice
-					Context context = getApplicationContext();
-					mSerialDriver = new ProlificSerialDriver(context, mUsbDevice);
+					mSerialDriver = new ProlificSerialDriver(context, device);
 					try {
 						mSerialDriver.setup(sp.getInt("baudRate",2400));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}else if(VendorID == 26728 && ProductID == 1536){//打印机
+//					mPrintSerialDriver = new ProlificSerialDriver(context, device, true);
+//					try {
+//						mPrintSerialDriver.setup(9600);
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
 				}
 			}
 		}
@@ -161,5 +167,11 @@ public class ProlificSerialService extends Service {
 		 * @param se 解析出来的数据
 		 */
 		void onReceivedMessage(int flag, String errorMsg, SerialEntity se);
+
+		/**
+		 * 把接到的数据原样输出到打印机
+		 * @param data
+		 */
+		void print(byte [] data);
 	}
 }

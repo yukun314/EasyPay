@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bfyd.easypay.activity.AliPayActivity;
+import com.bfyd.easypay.activity.BluetoothActivity;
 import com.bfyd.easypay.activity.OkHttpTest;
 import com.bfyd.easypay.activity.ProlificSerialActivity;
 import com.bfyd.easypay.activity.RefundActivity;
@@ -88,6 +89,16 @@ public class SplashActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				Intent intent  =  new Intent();
 				intent.setClass(SplashActivity.this , ProlificSerialActivity.class);
+				SplashActivity.this.startActivity(intent);
+			}
+		});
+
+		Button button7 = (Button) findViewById(R.id.activity_splash_button8);
+		button7.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent  =  new Intent();
+				intent.setClass(SplashActivity.this , BluetoothActivity.class);
 				SplashActivity.this.startActivity(intent);
 			}
 		});

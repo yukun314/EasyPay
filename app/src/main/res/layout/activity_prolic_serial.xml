@@ -6,27 +6,57 @@
 	android:background="#000"
 	android:orientation="vertical">
 
-	<Button
-		android:id="@+id/activity_prolic_serial_button"
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="设置"
-		android:textColor="#fff"/>
+		android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+			<Button
+				android:id="@+id/activity_prolic_serial_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="设置"
+				android:textColor="#fff"/>
 
-	<CheckBox
-		android:id="@+id/activity_prolic_serial_cb"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:checked="true"
-		android:text="客显"
-		android:textColor="#fff"/>
+			<CheckBox
+				android:id="@+id/activity_prolic_serial_cb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:checked="true"
+				android:text="客显"
+				android:textColor="#fff"/>
 
-	<Button
-		android:id="@+id/activity_prolic_serial_star"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="star"
-		android:textColor="#fff"/>
+			<Button
+				android:id="@+id/activity_prolic_serial_star"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="star"
+				android:textColor="#fff"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+			<TextView
+				android:id="@+id/activity_prolic_serial_bluetooth_message"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#fff"
+				android:textSize="18sp"/>
+
+			<ListView
+				android:id="@+id/activity_prolic_serial_bluetooth_list"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+		</LinearLayout>
+	</LinearLayout>
 
 	<LinearLayout android:layout_width="match_parent"
 	              android:layout_height="match_parent"

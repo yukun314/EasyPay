@@ -23,17 +23,19 @@ import android.widget.Toast;
  * @author zyk
  **/
 public class ProlificSerialDriver {
-	private static final int USB_READ_TIMEOUT_MILLIS = 1000;
+	private static final int USB_READ_TIMEOUT_MILLIS = 10;
 	private static final int USB_WRITE_TIMEOUT_MILLIS = 3000;
 	private final Object mReadBufferLock = new Object();
 	private final Object mWriteBufferLock = new Object();
 	
 	private ByteArrayOutputStream bufferOS = new ByteArrayOutputStream();
 	private Context context;
+	private boolean isPrinter = false;
 	private UsbEndpoint mReadEndpoint;
 	private UsbEndpoint mWriteEndpoint;
 	private UsbDeviceConnection connection;
 	private UsbDevice usbDevice;
+	private UsbInterface usbInterface;
 
 	private int baudRate;
 
@@ -58,8 +60,13 @@ public class ProlificSerialDriver {
 	};
 
 	public ProlificSerialDriver(Context context, UsbDevice usbDevice) {
+		this(context, usbDevice, false);
+	}
+
+	public ProlificSerialDriver(Context context, UsbDevice usbDevice, boolean isPrinter) {
 		this.context = context;
 		this.usbDevice = usbDevice;
+		this.isPrinter = isPrinter;
 	}
 
 	/**
@@ -80,9 +87,11 @@ public class ProlificSerialDriver {
 //				new Intent("com.prolific.pl2303hxdsimpletest.USB_PERMISSION"), 0);
 //		usbManager.requestPermission(usbDevice, mPermissionIntent);
 		if(usbManager.hasPermission(usbDevice)) {
-			UsbInterface usbInterface = usbDevice.getInterface(0);
-			for (int i = 0; i < usbInterface.getEndpointCount(); ++i) {
-				UsbEndpoint currentEndpoint = usbInterface.getEndpoint(i);
+			System.out.println("interfaceCount:"+usbDevice.getInterfaceCount());
+			if(usbDevice.getInterfaceCount() >0) {
+				usbInterface = usbDevice.getInterface(0);
+				for (int i = 0; i < usbInterface.getEndpointCount(); ++i) {
+					UsbEndpoint currentEndpoint = usbInterface.getEndpoint(i);
 
 //				switch (currentEndpoint.getAddress()) {
 //					case 0x83:
@@ -92,19 +101,24 @@ public class ProlificSerialDriver {
 //						mWriteEndpoint = currentEndpoint;
 //						break;
 //				}
-				switch (currentEndpoint.getDirection()){
-					case UsbConstants.USB_DIR_IN:
-						mReadEndpoint = currentEndpoint;
-						break;
-					case UsbConstants.USB_DIR_OUT:
-						mWriteEndpoint = currentEndpoint;
-						break;
+					switch (currentEndpoint.getDirection()) {
+						case UsbConstants.USB_DIR_IN:
+							mReadEndpoint = currentEndpoint;
+							break;
+						case UsbConstants.USB_DIR_OUT:
+							mWriteEndpoint = currentEndpoint;
+							break;
+					}
 				}
+				connection = usbManager.openDevice(usbDevice);
+				connection.claimInterface(usbInterface, true);
+				if(!isPrinter) {
+					initPL2303Chip();
+					ctrlOut(baudRate);
+				}
+			}else {
+				Toast.makeText(context,"失败！",Toast.LENGTH_SHORT).show();
 			}
-			connection = usbManager.openDevice(usbDevice);
-			connection.claimInterface(usbInterface, true);
-			initPL2303Chip();
-			ctrlOut(baudRate);
 		}else{
 			IntentFilter filter = new IntentFilter(ProlificSerialSettingActivity.ACTION_USB_PERMISSION);
 			context.registerReceiver(mUsbReceiver, filter);
@@ -112,6 +126,10 @@ public class ProlificSerialDriver {
 			Toast.makeText(context,"没有usb的使用权限，该功能暂时不能使用",Toast.LENGTH_SHORT).show();
 		}
 
+	}
+
+	public boolean releaseInterface(){
+		return connection.releaseInterface(usbInterface);
 	}
 
 	private final void ctrlOut(int baudRate) throws IOException {
@@ -223,16 +241,19 @@ public class ProlificSerialDriver {
 			return null;
 		}
 		synchronized (mReadBufferLock) {
+			long startime = System.currentTimeMillis();
 //			try {
 				bufferOS.reset();
 				int number = 0;
 				byte[] buffer = new byte[1024];
+			boolean a = false;
 				while (number != -1) {
 //				System.out.println("buffer.length:"+buffer.length);
 					number = connection.bulkTransfer(mReadEndpoint, buffer, buffer.length, USB_READ_TIMEOUT_MILLIS);
 //					System.out.println("while number:"+number);
 //					MainActivity.showMessage("number:" + number);
 					if(number > 0) {
+						a = true;
 						bufferOS.write(buffer, 0, number);
 					}
 //					System.out.println("bufferOS:"+bufferOS);
@@ -240,9 +261,14 @@ public class ProlificSerialDriver {
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
+			if(a) {
+				long endtime = System.currentTimeMillis();
+				System.out.println("接收时间:" + (endtime - startime));
+			}
 		}
 //		long end = System.currentTimeMillis();
 //		System.out.println("接收数据结束"+end+"   :"+(end-star));
+
 		return bufferOS.toByteArray();
 	}
 
@@ -265,7 +291,7 @@ public class ProlificSerialDriver {
 	 * 
 	 * @throws IOException
 	 */
-	private final void outControlTransfer(int requestType, int request, int value, int index, byte[] data)
+	private final void outControlTransfer  (int requestType, int request, int value, int index, byte[] data)
 			throws IOException {
 		int length = (data == null) ? 0 : data.length;
 		int result = connection.controlTransfer(requestType, request, value, index, data, length,
