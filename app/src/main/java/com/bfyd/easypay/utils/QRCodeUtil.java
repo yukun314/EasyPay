@@ -4,11 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
+import com.google.zxing.MyPoint;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +21,8 @@ public class QRCodeUtil {
 
 	private final static int foreground = 0xFF813DE1;
 	private final static int background = 0x00ffffff;
+	private final static int outLineColor = 0xffff1234;
+	private final static int insideLineColor = 0xff000000;
 
 	/**
 	 * 生成二维码Bitmap
@@ -48,9 +52,13 @@ public class QRCodeUtil {
 			// 下面这里按照二维码的算法，逐个生成二维码的图片
 			for (int y = 0; y < heightPix; y++) {
 				for (int x = 0; x < widthPix; x++) {
-					if (bitMatrix.get(x, y)) {
+					if (bitMatrix.get(x, y)) {//前景
 						pixels[y * widthPix + x] = foreground;
-					} else {
+					} else if(bitMatrix.getOutLine(x, y)){//定位点 外边框
+						pixels[y * widthPix + x] = outLineColor;
+					}else if(bitMatrix.getInsideLine(x, y)){//定位点 内边框
+						pixels[y * widthPix + x] = insideLineColor;
+					}else {
 						pixels[y * widthPix + x] = background;
 					}
 				}
