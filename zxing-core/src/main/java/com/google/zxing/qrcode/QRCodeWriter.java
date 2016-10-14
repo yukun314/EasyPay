@@ -18,6 +18,7 @@ package com.google.zxing.qrcode;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
+import com.google.zxing.MyPoint;
 import com.google.zxing.Writer;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -107,7 +108,13 @@ public final class QRCodeWriter implements Writer {
       // Write the contents of this row of the barcode
       for (int inputX = 0, outputX = leftPadding; inputX < inputWidth; inputX++, outputX += multiple) {
         if (input.get(inputX, inputY) == 1) {
-          output.setRegion(outputX, outputY, multiple, multiple);
+          if(input.getOutLine(inputX,inputY) == 1){
+            output.setRegionOutLine(outputX, outputY, multiple, multiple);
+          }else if(input.getInsideLine(inputX,inputY) == 1){
+            output.setRegionInsideLine(outputX, outputY, multiple, multiple);
+          }else{
+            output.setRegion(outputX, outputY, multiple, multiple);
+          }
         }
       }
     }

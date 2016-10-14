@@ -16,7 +16,12 @@
 
 package com.google.zxing.common;
 
+import com.google.zxing.MyPoint;
+
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>Represents a 2D matrix of bits. In function arguments below, and throughout the common
@@ -40,6 +45,9 @@ public final class BitMatrix implements Cloneable {
   private final int rowSize;
   private final int[] bits;
 
+  private final int[] outbits;
+  private final int[] insidebits;
+
   // A helper to construct a square matrix.
   public BitMatrix(int dimension) {
     this(dimension, dimension);
@@ -53,13 +61,18 @@ public final class BitMatrix implements Cloneable {
     this.height = height;
     this.rowSize = (width + 31) / 32;
     bits = new int[rowSize * height];
+    outbits = new int[rowSize * height];
+    insidebits = new int[rowSize * height];
+
   }
 
-  private BitMatrix(int width, int height, int rowSize, int[] bits) {
+  private BitMatrix(int width, int height, int rowSize, int[] bits, int[] outbits, int[] insidebits) {
     this.width = width;
     this.height = height;
     this.rowSize = rowSize;
     this.bits = bits;
+    this.outbits = outbits;
+    this.insidebits = insidebits;
   }
 
   public static BitMatrix parse(String stringRepresentation, String setString, String unsetString) {
@@ -129,6 +142,16 @@ public final class BitMatrix implements Cloneable {
   public boolean get(int x, int y) {
     int offset = y * rowSize + (x / 32);
     return ((bits[offset] >>> (x & 0x1f)) & 1) != 0;
+  }
+
+  public boolean getOutLine(int x, int y){
+    int offset = y * rowSize + (x / 32);
+    return ((outbits[offset] >>> (x & 0x1f)) & 1) != 0;
+  }
+
+  public boolean getInsideLine(int x, int y){
+    int offset = y * rowSize + (x / 32);
+    return ((insidebits[offset] >>> (x & 0x1f)) & 1) != 0;
   }
 
   /**
@@ -213,6 +236,46 @@ public final class BitMatrix implements Cloneable {
       int offset = y * rowSize;
       for (int x = left; x < right; x++) {
         bits[offset + (x / 32)] |= 1 << (x & 0x1f);
+      }
+    }
+  }
+
+  public void setRegionOutLine(int left, int top, int width, int height) {
+    if (top < 0 || left < 0) {
+      throw new IllegalArgumentException("Left and top must be nonnegative");
+    }
+    if (height < 1 || width < 1) {
+      throw new IllegalArgumentException("Height and width must be at least 1");
+    }
+    int right = left + width;
+    int bottom = top + height;
+    if (bottom > this.height || right > this.width) {
+      throw new IllegalArgumentException("The region must fit inside the matrix");
+    }
+    for (int y = top; y < bottom; y++) {
+      int offset = y * rowSize;
+      for (int x = left; x < right; x++) {
+        outbits[offset + (x / 32)] |= 1 << (x & 0x1f);
+      }
+    }
+  }
+
+  public void setRegionInsideLine(int left, int top, int width, int height) {
+    if (top < 0 || left < 0) {
+      throw new IllegalArgumentException("Left and top must be nonnegative");
+    }
+    if (height < 1 || width < 1) {
+      throw new IllegalArgumentException("Height and width must be at least 1");
+    }
+    int right = left + width;
+    int bottom = top + height;
+    if (bottom > this.height || right > this.width) {
+      throw new IllegalArgumentException("The region must fit inside the matrix");
+    }
+    for (int y = top; y < bottom; y++) {
+      int offset = y * rowSize;
+      for (int x = left; x < right; x++) {
+        insidebits[offset + (x / 32)] |= 1 << (x & 0x1f);
       }
     }
   }
@@ -443,7 +506,7 @@ public final class BitMatrix implements Cloneable {
 
   @Override
   public BitMatrix clone() {
-    return new BitMatrix(width, height, rowSize, bits.clone());
+    return new BitMatrix(width, height, rowSize, bits.clone(),outbits.clone(),insidebits.clone());
   }
 
 }

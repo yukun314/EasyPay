@@ -16,10 +16,13 @@
 
 package com.google.zxing.qrcode.encoder;
 
+import com.google.zxing.MyPoint;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.decoder.Version;
+
+import java.awt.Point;
 
 /**
  * @author satorux@google.com (Satoru Takabayashi) - creator
@@ -421,6 +424,15 @@ final class MatrixUtil {
     for (int y = 0; y < 7; ++y) {
       for (int x = 0; x < 7; ++x) {
         matrix.set(xStart + x, yStart + y, POSITION_DETECTION_PATTERN[y][x]);
+        if(POSITION_DETECTION_PATTERN[y][x] == 1){
+          MyPoint p = new MyPoint(xStart + x,yStart + y);
+          System.out.println(p.toString());
+          if(x == 0 || y == 0 || x == 6 || y == 6){
+            matrix.outLinePosition.add(p);
+          }else{
+            matrix.insideLinePosition.add(p);
+          }
+        }
       }
     }
   }

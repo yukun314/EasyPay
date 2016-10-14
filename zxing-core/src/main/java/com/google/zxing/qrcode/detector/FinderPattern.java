@@ -78,5 +78,4 @@ public final class FinderPattern extends ResultPoint {
     float combinedModuleSize = (count * estimatedModuleSize + newModuleSize) / combinedCount;
     return new FinderPattern(combinedX, combinedY, combinedModuleSize, combinedCount);
   }
-
 }

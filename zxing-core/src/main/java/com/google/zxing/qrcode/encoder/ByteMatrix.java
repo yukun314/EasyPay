@@ -16,6 +16,11 @@
 
 package com.google.zxing.qrcode.encoder;
 
+import com.google.zxing.MyPoint;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * JAVAPORT: The original code was a 2D array of ints, but since it only ever gets assigned
  * -1, 0, and 1, I'm going to use less memory and go with bytes.
@@ -27,6 +32,11 @@ public final class ByteMatrix {
   private final byte[][] bytes;
   private final int width;
   private final int height;
+
+  //定位点的外边框位置点
+  public final List<MyPoint> outLinePosition = new ArrayList();
+  //定位点的内边框位置点
+  public final List<MyPoint> insideLinePosition = new ArrayList();
 
   public ByteMatrix(int width, int height) {
     bytes = new byte[height][width];
@@ -44,6 +54,36 @@ public final class ByteMatrix {
 
   public byte get(int x, int y) {
     return bytes[y][x];
+  }
+
+  public byte getOutLine(int x, int y){
+    boolean a = false;
+    for(MyPoint p:outLinePosition){
+      if(x == p.x && y == p.y){
+        a = true;
+        break;
+      }
+    }
+    if(a){
+      return bytes[x][y];
+    }else{
+      return 0;
+    }
+  }
+
+  public byte getInsideLine(int x, int y){
+    boolean a = false;
+    for(MyPoint p:insideLinePosition){
+      if(x == p.x && y == p.y){
+        a = true;
+        break;
+      }
+    }
+    if(a){
+      return bytes[x][y];
+    }else{
+      return 0;
+    }
   }
 
   /**
